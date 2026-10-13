@@ -1,0 +1,18 @@
+name: Sync LeetCode History
+on:
+  workflow_dispatch: # This adds a manual "Run" button in GitHub!
+  schedule:
+    - cron: '0 0 * * *' # Automatically runs once a day
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Profile History
+        uses: joshcai/leetcode-sync@v1.7.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          filter-duplicate-ac: true
+          destination-folder: 'solutions'
